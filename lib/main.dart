@@ -64,7 +64,7 @@ class PowerCleanDialog extends StatelessWidget {
     return AlertDialog(
       content: ConstrainedBox(
         constraints: BoxConstraints(
-          maxHeight: MediaQuery.of(context).size.height * 0.6,
+          maxHeight: MediaQuery.sizeOf(context).height * 0.6,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -121,7 +121,7 @@ class PowerCleanDialog extends StatelessWidget {
             const SizedBox(height: 20),
             Center(
               child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
+                width: MediaQuery.sizeOf(context).width * 0.8,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.orange,
