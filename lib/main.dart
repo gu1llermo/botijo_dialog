@@ -42,7 +42,7 @@ class PowerCleanDialog extends StatelessWidget {
   const PowerCleanDialog({super.key});
 
   List<Map<String, dynamic>> _generateRMList() {
-    List<Map<String, dynamic>> rmList = [];
+    List<Map<String, double>> rmList = [];
     double percentage = 100.0;
     double weight = 102.9;
 
