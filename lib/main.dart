@@ -91,31 +91,29 @@ class PowerCleanDialog extends StatelessWidget {
                 SizedBox(height: 16),
               ],
             ),
-            Flexible(
-              child: SizedBox(
-                height: 120, // altura aproximada para los elementos
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: rmList.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'RM ${rmList[index]['percentage'].toStringAsFixed(1)}%',
-                            style: const TextStyle(fontSize: 16),
-                          ),
-                          Text(
-                            '${rmList[index]['weight'].toStringAsFixed(1)}Kg',
-                            style: const TextStyle(fontSize: 16),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+            SizedBox(
+              height: 120, // altura aproximada para los elementos
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: rmList.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'RM ${rmList[index]['percentage'].toStringAsFixed(1)}%',
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        Text(
+                          '${rmList[index]['weight'].toStringAsFixed(1)}Kg',
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
             ),
             const SizedBox(height: 20),
