@@ -62,83 +62,111 @@ class PowerCleanDialog extends StatelessWidget {
     final rmList = _generateRMList();
 
     return AlertDialog(
-      content: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxHeight: MediaQuery.sizeOf(context).height * 0.6,
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _HeaderWidget(),
+          _ElementosWidget(rmList: rmList),
+          const SizedBox(height: 20),
+          _CustomBotton(),
+        ],
+      ),
+    );
+  }
+}
+
+class _CustomBotton extends StatelessWidget {
+  const _CustomBotton();
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.orange,
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 30),
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Column(
-              children: [
-                Text(
-                  'Power Clean',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 8),
-                Text(
-                  'Here you can find yours RMs',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey,
-                  ),
-                ),
-                SizedBox(height: 16),
-              ],
-            ),
-            SizedBox(
-              height: 120, // altura para los elementos de la lista
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: rmList.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'RM ${rmList[index]['percentage'].toStringAsFixed(1)}%',
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                        Text(
-                          '${rmList[index]['weight'].toStringAsFixed(1)}Kg',
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-            const SizedBox(height: 20),
-            Center(
-              child: SizedBox(
-                width: MediaQuery.sizeOf(context).width * 0.8,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text(
-                    'Genial',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
-              ),
-            ),
-          ],
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: const Text(
+          'Genial',
+          style: TextStyle(fontSize: 16),
         ),
       ),
+    );
+  }
+}
+
+class _ElementosWidget extends StatelessWidget {
+  const _ElementosWidget({
+    required this.rmList,
+  });
+
+  final List<Map<String, dynamic>> rmList;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.sizeOf(context);
+
+    final width = size.width * 0.5;
+    return SizedBox(
+      height: 120, // altura para los elementos de la lista
+      width: width,
+
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: rmList.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'RM ${rmList[index]['percentage'].toStringAsFixed(1)}%',
+                  style: const TextStyle(fontSize: 16),
+                ),
+                Text(
+                  '${rmList[index]['weight'].toStringAsFixed(1)}Kg',
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _HeaderWidget extends StatelessWidget {
+  const _HeaderWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      children: [
+        Text(
+          'Power Clean',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: 8),
+        Text(
+          'Here you can find yours RMs',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.grey,
+          ),
+        ),
+        SizedBox(height: 16),
+      ],
     );
   }
 }
