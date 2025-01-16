@@ -92,7 +92,7 @@ class PowerCleanDialog extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 120, // altura aproximada para los elementos
+              height: 120, // altura para los elementos de la lista
               child: ListView.builder(
                 shrinkWrap: true,
                 itemCount: rmList.length,
