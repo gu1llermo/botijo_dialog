@@ -25,14 +25,67 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ElevatedButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => const PowerCleanDialog(),
-              );
-            },
-            child: Text('Click me')),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => const PowerCleanDialog(),
+                );
+              },
+              
+              child: Text('Click me'),
+            ),
+            const SizedBox(height: 30),
+            const CustomTextField(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CustomTextField extends StatefulWidget {
+  const CustomTextField({super.key});
+
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  late FocusNode _focusNode;
+  bool isFocused = false;
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+    _focusNode.addListener(listener);
+  }
+  void listener(){
+    isFocused = _focusNode.hasPrimaryFocus;
+    setState(() {
+      
+    });
+    // debugPrint('Hola');
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 100,
+      child: TextField(
+        focusNode: _focusNode,
+        decoration: InputDecoration(
+          label:  Text('Hola Mundo ${isFocused ? 'Cómo estás?' : '' } ') ,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(16))
+        ),
       ),
     );
   }
